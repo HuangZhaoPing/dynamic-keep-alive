@@ -15,7 +15,13 @@ export default new VueRouter({
     },
     {
       path: '/page1',
-      component: () => import('../views/page1')
+      component: () => import('../views/page1'),
+      children: [
+        {
+          path: 'page1-1',
+          component: () => import('../views/page1-1')
+        }
+      ]
     }
   ]
 })

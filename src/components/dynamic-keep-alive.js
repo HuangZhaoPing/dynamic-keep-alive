@@ -13,11 +13,24 @@ function getFirstComponentChild(children) {
   }
 }
 
+function matches(name) {
+  const keys = Object.keys(cache)
+  return keys.filter(key => {
+    return name === key.substr(key.indexOf('-') + 1)
+  })
+}
+
 export default {
   name: 'dynamic-keep-alive',
 
   removeCache(name) {
-    cache[name] = null
+    const keys = matches(name)
+    keys.forEach(key => {
+      if (cache[key]) {
+        cache[key].componentInstance.$destroy()
+        cache[key] = null
+      }
+    })
   },
 
   render() {
@@ -25,8 +38,11 @@ export default {
     const vnode = getFirstComponentChild(slot)
     const componentOptions = vnode && vnode.componentOptions
     if (componentOptions) {
-      const key = vnode.componentOptions.Ctor.options.name
-      if (key !== void 0) {
+      const ctor = vnode.componentOptions.Ctor
+      const name = ctor.options.name
+      const cid = ctor.cid
+      const key = `${cid}-${name}`
+      if (name !== void 0) {
         if (cache[key]) {
           vnode.componentInstance = cache[key].componentInstance
         } else {

@@ -11,11 +11,11 @@ export default {
   name: 'Home',
   methods: {
     refresh () {
-      this.$dynamicKeepAlive.removeCache('Page1')
+      this.$dynamicKeepAlive.removeCache('page-1-1')
       this.goToPage1()
     },
     goToPage1 () {
-      this.$router.push('/page1')
+      this.$router.push('/page1/page1-1')
     }
   }
 }
