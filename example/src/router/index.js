@@ -14,12 +14,24 @@ export default new VueRouter({
       component: () => import('../views/home')
     },
     {
-      path: '/page1',
-      component: () => import('../views/page1'),
+      path: '/list',
+      component: () => import('../views/list')
+    },
+    {
+      path: '/detail',
+      component: () => import('../views/detail')
+    },
+    {
+      path: '/user',
+      component: () => import('../views/user'),
       children: [
         {
-          path: 'page1-1',
-          component: () => import('../views/page1-1')
+          path: 'detail',
+          component: () => import('../views/user/detail')
+        },
+        {
+          path: 'contacts',
+          component: () => import('../views/user/contacts')
         }
       ]
     }

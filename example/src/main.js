@@ -4,7 +4,7 @@ import router from './router'
 import DynamicKeepAlive from '../../src'
 // import DynamicKeepAlive from '../../dist'
 
-Vue.use(DynamicKeepAlive)
+Vue.use(DynamicKeepAlive, { exclude: [ 'list' ] })
 
 new Vue({
   el: '#app',
