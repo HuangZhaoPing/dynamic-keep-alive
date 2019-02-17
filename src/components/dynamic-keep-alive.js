@@ -33,12 +33,20 @@ function matches(name) {
   })
 }
 
-function recursiveRemove(componentInstance) {
+function handleRemove(key) {
+  const cached = cache[key]
+  if (cached) {
+    const instance = cached.componentInstance
+    instance.$destroy()
+    cache[key] = null
+  }
+}
+
+function removeChildrenCache(componentInstance) {
   const children = componentInstance.$children
   if (Array.isArray(children) && children.length > 0) {
     for (let i = children.length - 1; i >= 0; i--) {
       const c = children[i]
-      recursiveRemove(c)
       const vnode = c.$vnode
       const id = getComponentId(vnode)
       const name = getComponentName(vnode)
@@ -49,35 +57,13 @@ function recursiveRemove(componentInstance) {
   }
 }
 
-function handleRemove(key) {
-  const cached = cache[key]
-  if (cached) {
-    const instance = cached.componentInstance
-    instance.$destroy()
-    cache[key] = null
-  }
-}
-
-function handleChildren(key) {
-  const cached = cache[key]
-  if (cached) {
-    const instance = cached.componentInstance
-    recursiveRemove(instance)
-  }
-}
-
-function beforeRemove(key) {
-  handleChildren(key)
-  handleRemove(key)
-}
-
 function singleRemove(name) {
   if (cache[name]) {
-    beforeRemove(name)
+    handleRemove(name)
   } else {
     const keys = matches(name)
     keys.forEach(k => {
-      beforeRemove(k)
+      handleRemove(k)
     })
   }
 }
@@ -101,7 +87,11 @@ export function removeCache(parameter) {
   }
 }
 
-const DynamicKeepAlive = {
+export function initOptions(o = {}) {
+  options = o
+}
+
+export const DynamicKeepAlive = {
   name: 'dynamic-keep-alive',
   render() {
     const slot = this.$slots.default
@@ -121,10 +111,8 @@ const DynamicKeepAlive = {
       }
     }
     return vnode || (slot && slot[0])
+  },
+  beforeDestroy() {
+    removeChildrenCache(this)
   }
-}
-
-export function inject(o = {}) {
-  options = o
-  return DynamicKeepAlive
 }
