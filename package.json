@@ -1,6 +1,6 @@
 {
   "name": "dynamic-keep-alive",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "keywords": [ "vue", "vue-router", "keep-alive", "cache"],
   "description": "vue、vue-router、keep-alive、cache",
   "main": "./dist/index.js",
