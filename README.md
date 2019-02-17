@@ -35,6 +35,10 @@ main.js：
     this.$dynamicKeepAlive.removeCache('list')
     this.$router.push({ name: 'list' })
 
+可同时删除多个：
+
+    this.$dynamicKeepAlive.removeCache([ 'list', 'detail', ... ])
+
 ## 关于嵌套路由
 
 dynamic-keep-alive可以使用在嵌套路由中，比如：
@@ -86,3 +90,7 @@ router.js：
 
     // 如果缓存了user、detail、contacts三个组件，那么在删除user时，detail和contacts会一并删除
     this.$dynamicKeepAlive.removeCache('user')
+
+## github地址
+
+[https://github.com/HuangZhaoPing/dynamic-keep-alive](https://github.com/HuangZhaoPing/dynamic-keep-alive)  欢迎交流
