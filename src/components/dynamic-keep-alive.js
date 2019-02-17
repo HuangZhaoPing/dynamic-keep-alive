@@ -124,7 +124,7 @@ const DynamicKeepAlive = {
   }
 }
 
-export function inject(o) {
+export function inject(o = {}) {
   options = o
   return DynamicKeepAlive
 }
