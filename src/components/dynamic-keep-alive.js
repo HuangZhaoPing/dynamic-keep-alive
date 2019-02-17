@@ -89,7 +89,6 @@ function multipleRemove(names) {
 }
 
 export function removeCache(parameter) {
-  console.log(options)
   const rawType = toRawType(parameter)
   const includeType = [ 'String', 'Array' ]
   if (!includeType.includes(rawType)) {
