@@ -1,39 +1,21 @@
-import Vue from 'Vue'
+import Vue from 'vue'
 import VueRouter from 'vue-router'
+import home from './home'
+import goods from './goods'
+import test1 from './test1'
 
 Vue.use(VueRouter)
 
+const constantRoutes = [
+  { path: '/', redirect: 'home' }
+]
+
+export const asyncRoutes = [
+  home,
+  goods,
+  test1
+]
+
 export default new VueRouter({
-  routes: [
-    {
-      path: '/',
-      redirect: '/home'
-    },
-    {
-      path: '/home',
-      component: () => import('../views/home')
-    },
-    {
-      path: '/list',
-      component: () => import('../views/list')
-    },
-    {
-      path: '/detail',
-      component: () => import('../views/detail')
-    },
-    {
-      path: '/user',
-      component: () => import('../views/user'),
-      children: [
-        {
-          path: 'detail',
-          component: () => import('../views/user/detail')
-        },
-        {
-          path: 'contacts',
-          component: () => import('../views/user/contacts')
-        }
-      ]
-    }
-  ]
+  routes: asyncRoutes.concat(constantRoutes)
 })

@@ -1,11 +1,13 @@
 <template>
-  <dynamic-keep-alive>
-    <router-view/>
-  </dynamic-keep-alive>
+  <app-layout/>
 </template>
 
 <script>
+import AppLayout from '@/components/AppLayout'
+
 export default {
-  name: 'App'
+  components: {
+    AppLayout
+  }
 }
 </script>

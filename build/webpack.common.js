@@ -1,30 +1,19 @@
-const path = require('path')
-
-const resolve = dir => {
-  return path.resolve(__dirname, dir)
-}
-
 module.exports = {
   resolve: {
-    extensions: [ '.js', '.vue' ]
+    extensions: ['.js', '.json', '.jsx', '.css', '.vue']
   },
   module: {
     rules: [
       {
-        test: /\.js$/,
-        include: [
-          resolve('../src'),
-          resolve('../example')
-        ],
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: [ '@babel/preset-env' ],
-            plugins: [
-              'dynamic-import-webpack'
-            ]
-          }
-        }
+        enforce: 'pre',
+        test: /\.(js|vue)$/,
+        exclude: /(node_modules|bower_components)/,
+        use: 'eslint-loader'
+      },
+      {
+        test: /\.m?js$/,
+        exclude: /(node_modules|bower_components)/,
+        use: 'babel-loader'
       }
     ]
   }
