@@ -71,21 +71,27 @@ router-view中：
 
 ### options
 
-Vue.use(DynamicKeepAlive, options)
-
 | 属性 | 类型 | 说明 |
 | ---- | ---- | ---- |
 | max | Number | 设置最大缓存个数，默认20，当达到最大缓存后，会清除最先缓存的组件。|
 | exclude | Array | 添加到此选项的页面均不缓存 |
 | noCache | Boolean | 为true时，所以页面均不缓存 |
 
-### methods
+    Vue.use(DynamicKeepAlive, {
+      max: 20,
+      exclude: ['goods-list'],
+      noCache: true
+    })
 
-import { removeCache } from 'dynamic-keep-alive'
+### methods
 
 | 属性 | 参数类型 | 说明 |
 | ---- | ---- | ---- |
 | removeCache | String \| Number | 清除指定name组件的缓存 |
+
+    import { removeCache } from 'dynamic-keep-alive'
+
+    removeCache('goods-list')
 
 ## 项目地址
 
