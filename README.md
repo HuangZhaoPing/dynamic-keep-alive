@@ -97,6 +97,8 @@ router-view中：
 
     git clone https://github.com/HuangZhaoPing/dynamic-keep-alive.git
 
+
+    npm install
     npm run example
 
 ## 项目地址
