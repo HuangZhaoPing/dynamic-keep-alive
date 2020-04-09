@@ -93,6 +93,12 @@ router-view中：
 
     removeCache('goods-list')
 
+## Example
+
+    git clone https://github.com/HuangZhaoPing/dynamic-keep-alive.git
+
+    npm run example
+
 ## 项目地址
 
 <https://github.com/HuangZhaoPing/dynamic-keep-alive>
