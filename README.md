@@ -81,6 +81,8 @@ Vue.use(DynamicKeepAlive, options)
 
 ### methods
 
+import { removeCache } from 'dynamic-keep-alive'
+
 | 属性 | 参数类型 | 说明 |
 | ---- | ---- | ---- |
 | removeCache | String \| Number | 清除指定name组件的缓存 |
