@@ -33,7 +33,7 @@ router-view中：
       <router-view/>
     </dynamic-keep-alive>
 
-** 注意：如果使用的是嵌套路由，则所有router-view都需要包裹\<dynamic-keep-alive\>**
+**注意：如果使用的是嵌套路由，则所有router-view都需要包裹\<dynamic-keep-alive\>**
 
 页面组件中：
 
