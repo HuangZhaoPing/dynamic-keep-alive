@@ -3,11 +3,11 @@
     class="tabs"
     type="card"
     :value="$route.name"
-    closable
     @tab-click="onClick"
     @tab-remove="removeTab">
     <el-tab-pane
       v-for="item in tabs"
+      :closable="item.name !== 'home'"
       :key="item.name"
       :label="item.meta.title"
       :name="item.name"
@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import { removeCache } from '@root/src'
+import { removeCache } from '@root/src/main.js'
 
 const TABS_CACHE_KEY = 'TABS_CACHE_KEY'
 const tabs = JSON.parse(sessionStorage.getItem(TABS_CACHE_KEY)) || [{ name: 'home', meta: { title: '首页' } }]
@@ -46,7 +46,6 @@ export default {
     onEdit (name, action) {
       if (action === 'remove') {
         this.removeTab(name)
-        this.updateCache()
       }
     },
 
@@ -54,6 +53,7 @@ export default {
       const index = this.findIndex(name)
       if (index !== -1) {
         this.tabs.splice(index, 1)
+        this.updateCache()
         removeCache(name)
         if (this.$route.name === name) {
           this.$router.push(this.tabs[index - 1])

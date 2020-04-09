@@ -3,7 +3,7 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import App from './App'
 import router from './router'
-import DynamicKeepAlive from '@root/src'
+import DynamicKeepAlive from '@root/src/main.js'
 import '@/assets/styles/common.scss'
 
 Vue.config.productionTip = false

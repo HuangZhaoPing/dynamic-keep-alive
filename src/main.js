@@ -7,6 +7,4 @@ export default {
   }
 }
 
-export {
-  removeCache
-}
+export { removeCache }

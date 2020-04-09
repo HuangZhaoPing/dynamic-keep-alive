@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import { removeCache } from '@root/src'
+import { removeCache } from '@root/src/main.js'
 
 export default {
   name: 'goods-all',
@@ -65,12 +65,12 @@ export default {
       setTimeout(() => {
         this.loading = false
         this.tableData = [
-          { name: 'iPhone 11', brand: '苹果（apple）', price: '￥5999' },
-          { name: 'HUAWIE P30', brand: '华为', price: '￥6999' },
-          { name: 'xiaomi 10', brand: '小米', price: '￥7999' },
-          { name: 'meizu 16x', brand: '魅族', price: '￥8999' }
+          { name: 'iPhone 11', brand: '苹果（apple）', price: '￥5999', image: 'http://pro-fd.zol-img.com.cn/t_s400x300c4/g4/M06/06/06/ChMlzF14TlCIcWnlAAD6Gw8y-zkAAXoDwLrMZgAAPoz184.jpg' },
+          { name: 'HUAWIE P30', brand: '华为', price: '￥6999', image: 'http://img1.imgtn.bdimg.com/it/u=3661510785,4189688450&fm=26&gp=0.jpg' },
+          { name: 'xiaomi 10', brand: '小米', price: '￥7999', image: 'http://img1.imgtn.bdimg.com/it/u=3867710555,2117117988&fm=11&gp=0.jpg' },
+          { name: 'meizu 16', brand: '魅族', price: '￥8999', image: 'http://img3.imgtn.bdimg.com/it/u=605485833,3688342626&fm=26&gp=0.jpg' }
         ]
-      }, 2000)
+      }, 1000)
     }
   }
 }

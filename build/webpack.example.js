@@ -6,7 +6,7 @@ const merge = require('webpack-merge')
 const { resolve } = require('./utils')
 const common = require('./webpack.common')
 
-module.exports = merge(common, {
+const config = merge(common, {
   mode: 'development',
   devtool: 'inline-source-map',
   entry: resolve('example/src/main.js'),
@@ -80,14 +80,22 @@ module.exports = merge(common, {
       title: 'Example',
       template: resolve('example/index.html')
     }),
-    new FriendlyErrorsPlugin({
-      compilationSuccessInfo: {
-        messages: ['Example is running here http://localhost:9000 ']
-      }
-    }),
     new VueLoaderPlugin(),
     new StyleLintPlugin({
       files: ['**/*.{vue,htm,html,css,sss,less,scss,sass}']
     })
   ]
 })
+
+module.exports = () => {
+  const { https, host, port } = config.devServer
+  const protocol = https ? 'https:' : 'http:'
+  config.plugins.push(
+    new FriendlyErrorsPlugin({
+      compilationSuccessInfo: {
+        messages: [`Example is running here ${protocol}//${host}:${port}`]
+      }
+    })
+  )
+  return config
+}

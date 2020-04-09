@@ -4,9 +4,6 @@
 
 <script>
 export default {
-  name: 'home',
-  created () {
-    console.log('xxxx')
-  }
+  name: 'home'
 }
 </script>

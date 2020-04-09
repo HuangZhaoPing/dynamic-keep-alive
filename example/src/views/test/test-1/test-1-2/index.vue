@@ -1,8 +1,8 @@
 <template>
   <div>
     <el-alert
-      title="测试菜单1-1-1"
-      type="success">
+      title="测试菜单1-1-2"
+      type="info">
     </el-alert>
     <el-table
       :data="tableData"
@@ -31,7 +31,7 @@
 
 <script>
 export default {
-  name: 'test1-1-1',
+  name: 'test-1-2',
 
   data () {
     return {
@@ -54,7 +54,7 @@ export default {
           { name: 'iPhone 11', brand: '苹果（apple）', price: '￥5999' },
           { name: 'iPhone 11', brand: '苹果（apple）', price: '￥5999' }
         ]
-      }, 2000)
+      }, 1000)
     }
   }
 }

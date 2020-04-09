@@ -1,7 +1,7 @@
 <template>
   <header class="app-header">
     您好，欢迎使用
-    <el-button type="text">退出登录</el-button>
+    <el-button type="text" size="medium">退出登录</el-button>
   </header>
 </template>
 

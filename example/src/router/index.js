@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import home from './home'
 import goods from './goods'
-import test1 from './test1'
+import test from './test'
 
 Vue.use(VueRouter)
 
@@ -13,7 +13,7 @@ const constantRoutes = [
 export const asyncRoutes = [
   home,
   goods,
-  test1
+  test
 ]
 
 export default new VueRouter({
