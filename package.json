@@ -1,6 +1,6 @@
 {
   "name": "dynamic-keep-alive",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Components used to cache in Vue",
   "main": "lib/dynamic-keep-alive.js",
   "scripts": {
