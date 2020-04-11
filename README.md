@@ -1,6 +1,6 @@
 # DynamicKeepAlive
 
-基于Vue的缓存组件，常用于做后台管理系统的标签页缓存。
+基于Vue的缓存组件，可以对页面进行缓存控制，适合用在带标签页的后台管理系统中。
 
 ![演示](https://github.com/HuangZhaoPing/document-assets/blob/master/images/dynamic-keep-alive/test.gif?raw=true)
 
@@ -9,7 +9,7 @@
 * 切换标签页时，不需要刷新页面
 * 关闭标签页后，重新打开，需要刷新页面
 
-相对于 keep-alive + vuex 实现有以下优势：
+相比 keep-alive + vuex 解决方案有以下优势：
 
 * 不需要依赖vuex
 * 可用在嵌套路由中（在通过路由生成菜单的场景下非常实用）
