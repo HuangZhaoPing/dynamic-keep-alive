@@ -22,7 +22,7 @@
 
 main.js：
 
-    import Vue from 'vue
+    import Vue from 'vue'
     import DynamicKeepAlive from 'dynamic-keep-alive'
 
     Vue.use(DynamicKeepAlive)
