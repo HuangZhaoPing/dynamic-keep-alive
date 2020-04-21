@@ -33,5 +33,6 @@ module.exports = merge(common, {
     new webpack.BannerPlugin({
       banner: `DynamicKeepAlive.js v${version}`
     })
-  ]
+  ],
+  stats: { modules: false }
 })
