@@ -31,14 +31,14 @@ export default {
 
 <style lang="scss" scoped>
 .app-layout {
-  height: 100vh;
   display: flex;
   flex-direction: column;
+  height: 100vh;
 
   section {
+    display: flex;
     flex: 1;
     overflow: hidden;
-    display: flex;
   }
 
   .inner {

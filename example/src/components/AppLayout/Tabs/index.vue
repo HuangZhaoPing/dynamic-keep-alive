@@ -79,7 +79,7 @@ export default {
 
 <style lang="scss" scoped>
 .tabs {
-  /deep/ .el-tabs__header {
+  ::v-deep .el-tabs__header {
     margin: 0;
     margin-top: 10px;
 
@@ -88,10 +88,10 @@ export default {
 
       .el-tabs__nav-scroll {
         .el-tabs__item {
+          border-radius: 0;
           height: 35px;
           line-height: 35px;
           min-width: 160px;
-          border-radius: 0;
 
           .el-icon-close {
             position: absolute;

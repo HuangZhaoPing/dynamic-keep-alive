@@ -13,12 +13,12 @@ export default {
 
 <style lang="scss" scoped>
 .app-header {
-  height: 60px;
-  line-height: 60px;
   background-color: rgb(84, 92, 100);
-  padding: 0 10px;
   color: #fff;
   flex-shrink: 0;
+  height: 60px;
+  line-height: 60px;
+  padding: 0 10px;
   text-align: right;
 }
 </style>

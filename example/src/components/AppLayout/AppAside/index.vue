@@ -48,10 +48,10 @@ export default {
 
 <style lang="scss" scoped>
 .app-aside {
-  flex-shrink: 0;
   border-right: solid 1px #e6e6e6;
   display: flex;
   flex-direction: column;
+  flex-shrink: 0;
 }
 
 .aside-main {
@@ -66,11 +66,11 @@ export default {
 }
 
 .collapse-btn {
-  display: flex;
   align-items: center;
-  justify-content: center;
-  height: 100%;
   cursor: pointer;
+  display: flex;
+  height: 100%;
+  justify-content: center;
 
   i {
     font-size: 18px;
@@ -78,8 +78,8 @@ export default {
 }
 
 .el-menu {
+  border-right: 0;
   height: 100%;
-  border-right: none;
 
   &:not(.el-menu--collapse) {
     width: 200px;
