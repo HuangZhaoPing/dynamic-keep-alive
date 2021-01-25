@@ -59,13 +59,13 @@ router-view中：
 
 通过调用以下方法清除缓存：
 
-    import { removeCache } from 'dynamic-keep-alive'
+    import { remove } from 'dynamic-keep-alive'
 
     // 清除单个
-    removeCache('goods-list')
+    remove('goods-list')
 
     // 清除多个
-    removeCache(['goods-list', 'goods-detail'])
+    remove(['goods-list', 'goods-detail'])
 
 ## API
 
@@ -87,11 +87,9 @@ router-view中：
 
 | 属性 | 参数类型 | 说明 |
 | ---- | ---- | ---- |
-| removeCache | String \| Number | 清除指定name组件的缓存 |
-
-    import { removeCache } from 'dynamic-keep-alive'
-
-    removeCache('goods-list')
+| remove | String \| Array | 清除指定name组件的缓存 |
+| clear | - | 清除所有缓存 |
+| getInstance | String | 根据name获取被缓存的组件实例 |
 
 ## Example
 
