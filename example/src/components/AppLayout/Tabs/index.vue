@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import { removeCache } from '@root/src/main.js'
+import { remove } from '@root/src/main.js'
 
 const TABS_CACHE_KEY = 'TABS_CACHE_KEY'
 const tabs = JSON.parse(sessionStorage.getItem(TABS_CACHE_KEY)) || [{ name: 'home', meta: { title: '首页' } }]
@@ -54,7 +54,7 @@ export default {
       if (index !== -1) {
         this.tabs.splice(index, 1)
         this.updateCache()
-        removeCache(name)
+        remove(name)
         if (this.$route.name === name) {
           this.$router.push(this.tabs[index - 1])
         }

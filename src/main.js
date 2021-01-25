@@ -1,4 +1,11 @@
-import { initOptions, removeCache, DynamicKeepAlive } from './dynamic-keep-alive'
+import {
+  DynamicKeepAlive,
+  cache,
+  initOptions,
+  clear,
+  remove,
+  getInstance
+} from './dynamic-keep-alive'
 
 export default {
   install (Vue, options) {
@@ -7,4 +14,9 @@ export default {
   }
 }
 
-export { removeCache }
+export {
+  cache,
+  clear,
+  remove,
+  getInstance
+}

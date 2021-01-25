@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import { removeCache } from '@root/src/main.js'
+import { remove } from '@root/src/main.js'
 
 export default {
   name: 'goods-sale',
@@ -54,7 +54,7 @@ export default {
   methods: {
     showDetail (row) {
       const name = 'goods-detail'
-      removeCache(name)
+      remove(name)
       this.$router.push({
         name,
         query: row

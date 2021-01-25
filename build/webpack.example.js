@@ -16,7 +16,7 @@ const config = merge(common, {
   },
   devServer: {
     host: 'localhost',
-    port: 9000,
+    port: 9010,
     clientLogLevel: 'warning',
     compress: true,
     inline: true,

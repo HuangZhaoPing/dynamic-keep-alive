@@ -1,13 +1,29 @@
-import { isDef, isAsyncPlaceholder, toRawType } from './utils'
+const cache = new Map()
+let options = null
 
-const cache = {}
-const cacheKeys = []
-let options
+function initOptions (o = {}) {
+  options = {
+    max: o.max || 20,
+    exclude: o.exclude || []
+  }
+}
+
+function isDef (v) {
+  return v !== undefined && v !== null
+}
+
+function toRawType (value) {
+  return Object.prototype.toString.call(value).slice(8, -1)
+}
+
+function isAsyncPlaceholder (node) {
+  return node.isComment && node.asyncFactory
+}
 
 function getFirstComponentChild (children) {
   if (Array.isArray(children)) {
-    for (let i = 0; i < children.length; i++) {
-      const c = children[i]
+    for (var i = 0; i < children.length; i++) {
+      var c = children[i]
       if (isDef(c) && (isDef(c.componentOptions) || isAsyncPlaceholder(c))) {
         return c
       }
@@ -15,88 +31,76 @@ function getFirstComponentChild (children) {
   }
 }
 
-function matches (name) {
-  const keys = Object.keys(cache)
-  return keys.filter(k => {
-    return name === k.substr(k.indexOf('-') + 1)
-  })
+function removeCacheEntry () {
+  const name = [...cache.keys()][0]
+  handleRemove(name)
 }
 
-function handleRemove (key) {
-  const cached = cache[key]
-  if (cached) {
-    const instance = cached.componentInstance
-    if (instance) {
-      instance.$destroy()
-      cache[key] = null
-      delete cache[key]
-    }
+function remove (val) {
+  const rawType = toRawType(val)
+  const types = ['String', 'Array']
+  if (!types.includes(rawType)) {
+    throw new Error('The parameter type must be String or Array!')
   }
-}
-
-function singleRemove (name) {
-  if (cache[name]) {
-    handleRemove(name)
+  if (rawType === 'String') {
+    handleRemove(val)
   } else {
-    const keys = matches(name)
-    keys.forEach(k => {
-      handleRemove(k)
+    val.forEach(val => {
+      handleRemove(val)
     })
   }
 }
 
-function multipleRemove (names) {
-  names.forEach(name => {
-    singleRemove(String(name))
+function clear () {
+  [...cache.keys()].forEach(name => {
+    handleRemove(name)
   })
 }
 
-function handleMaxCache (key) {
-  cacheKeys.push(key)
-  if (cacheKeys.length > options.max) {
-    const k = cacheKeys.shift()
-    singleRemove(k)
+function getInstance (name) {
+  const cached = cache.get(name)
+  return cached ? cached.componentInstance : null
+}
+
+function handleRemove (name) {
+  const cached = cache.get(name)
+  if (cached) {
+    cached.componentInstance.$destroy()
+    cache.delete(name)
   }
 }
 
-export function removeCache (parameter) {
-  const rawType = toRawType(parameter)
-  const includeType = ['String', 'Array']
-  if (!includeType.includes(rawType)) {
-    throw new Error('The parameter type must be String or Array!')
-  }
-  if (rawType === 'String') {
-    singleRemove(parameter)
-  } else {
-    multipleRemove(parameter)
-  }
-}
-
-export function initOptions (o = {}) {
-  o.max = o.max || 20
-  options = o
-}
-
-export const DynamicKeepAlive = {
+const DynamicKeepAlive = {
   name: 'DynamicKeepAlive',
   render () {
     const slot = this.$slots.default
     const vnode = getFirstComponentChild(slot)
     const componentOptions = vnode && vnode.componentOptions
     if (componentOptions) {
-      const id = componentOptions.Ctor.cid
       const { name, noCache } = componentOptions.Ctor.options
-      const key = `${id}-${name}`
-      if (name !== undefined && !noCache && (!options.exclude || !options.exclude.includes(name)) && !options.noCache) {
-        if (cache[key]) {
-          vnode.componentInstance = cache[key].componentInstance
+      if (name && !noCache && (!options.exclude || !options.exclude.includes(name)) && !options.noCache) {
+        const cached = cache.get(name)
+        if (cached) {
+          cache.delete(name)
+          vnode.componentInstance = cached.componentInstance
         } else {
-          cache[key] = vnode
-          handleMaxCache(key)
+          if (options.max && cache.size > options.max) {
+            removeCacheEntry()
+          }
         }
+        cache.set(name, vnode)
         vnode.data.keepAlive = true
       }
     }
     return vnode || (slot && slot[0])
   }
+}
+
+export {
+  DynamicKeepAlive,
+  cache,
+  initOptions,
+  clear,
+  remove,
+  getInstance
 }
