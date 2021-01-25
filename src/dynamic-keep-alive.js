@@ -81,7 +81,7 @@ const DynamicKeepAlive = {
       if (name && !noCache && (!options.exclude || !options.exclude.includes(name)) && !options.noCache) {
         const cached = cache.get(name)
         if (cached) {
-          cache.delete(name)
+          handleRemove(name)
           vnode.componentInstance = cached.componentInstance
         } else {
           if (options.max && cache.size > options.max) {
