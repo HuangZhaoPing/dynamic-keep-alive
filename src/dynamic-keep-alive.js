@@ -1,4 +1,5 @@
 const cache = new Map()
+const keys = new Map()
 let options = null
 
 function initOptions (o = {}) {
@@ -32,7 +33,7 @@ function getFirstComponentChild (children) {
 }
 
 function removeCacheEntry () {
-  const name = [...cache.keys()][0]
+  const name = Array.from(keys.keys())[0]
   handleRemove(name)
 }
 
@@ -52,21 +53,23 @@ function remove (val) {
 }
 
 function clear () {
-  [...cache.keys()].forEach(name => {
+  Array.from(keys.keys()).forEach(name => {
     handleRemove(name)
   })
 }
 
 function getInstance (name) {
-  const cached = cache.get(name)
+  const cached = cache.get(keys.get(name))
   return cached ? cached.componentInstance : null
 }
 
 function handleRemove (name) {
-  const cached = cache.get(name)
+  const key = keys.get(name)
+  const cached = cache.get(key)
   if (cached) {
     cached.componentInstance.$destroy()
-    cache.delete(name)
+    cache.delete(key)
+    keys.delete(name)
   }
 }
 
@@ -77,18 +80,21 @@ const DynamicKeepAlive = {
     const vnode = getFirstComponentChild(slot)
     const componentOptions = vnode && vnode.componentOptions
     if (componentOptions) {
+      const id = componentOptions.Ctor.cid
       const { name, noCache } = componentOptions.Ctor.options
+      const key = [id, name].join('&')
       if (name && !noCache && (!options.exclude || !options.exclude.includes(name)) && !options.noCache) {
-        const cached = cache.get(name)
+        const cached = cache.get(key)
         if (cached) {
-          handleRemove(name)
           vnode.componentInstance = cached.componentInstance
+          keys.delete(name)
         } else {
+          cache.set(key, vnode)
           if (options.max && cache.size > options.max) {
             removeCacheEntry()
           }
         }
-        cache.set(name, vnode)
+        keys.set(name, key)
         vnode.data.keepAlive = true
       }
     }
